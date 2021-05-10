@@ -1,0 +1,9 @@
+JCStress测试并发
+4种并发方式
+    1.thread：裸线程
+
+    2.executors：java并发框架 Executors和Services
+
+    3.fork/join：ForkJoin框架
+
+    4.actors：Actor模型
