@@ -1,0 +1,9 @@
+1. 几个非常有用的工具类：CountDownLatch、CyclicBarrier、Semaphore、Exchanger
+    1.1. CountDownLatch和CyclicBarrier区别
+         CountDownLatch是一个计数器，线程完成一个记录，计数器减1，只能使用一次；参与的线程职责也不同，有的在倒计时，有的在等待倒计时结束
+         CyclicBarrier是一道门，需要所有的线程都到达，然后继续执行，计数器递增；可以多次使用，提供reset功能
+    1.2. 区别，使用场景
+         CountDownLatch： 一个线程（主线程）要等待其它所有线程执行完本线程再执行
+         CyclicBarrier：
+         Semaphore：公共资源有限，限流的目的
+         Exchanger：数据交换，如遗传算法
