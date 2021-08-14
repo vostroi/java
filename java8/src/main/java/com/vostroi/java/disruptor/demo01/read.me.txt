@@ -1,0 +1,29 @@
+1.pom引入
+2.我们从一个简单的例子开始学习Disruptor：生产者传递一个long类型的值给消费者，而消费者消费这个数据的方式仅仅是把它打印出来。首先声明一个Event来包含需要传递的数据 LongEvent
+3.由于需要让Disruptor为我们创建事件，我们同时还声明了一个EventFactory来实例化Event对象 LongEventFactory
+4.我们还需要一个事件消费者，也就是一个事件处理器。这个事件处理器简单地把事件中存储的数据打印到终端 LongEventHandler
+5.事件都会有一个生成事件的源 LongEventProducer
+6.很明显的是：当用一个简单队列来发布事件的时候会牵涉更多的细节，这是因为事件对象还需要预先创建。发布事件最少需要两步：获取下一个事件槽并发布事件（发布事件的时候要使用try/finnally保证事件一定会被发布）。
+  如果我们使用RingBuffer.next()获取一个事件槽，那么一定要发布对应的事件。如果不能发布事件，那么就会引起Disruptor状态的混乱。尤其是在多个事件生产者的情况下会导致事件消费者失速，从而不得不重启应用才能会恢复。
+  Disruptor 3.0提供了lambda式的API。这样可以把一些复杂的操作放在Ring Buffer，所以在Disruptor3.0以后的版本最好使用Event Publisher或者Event Translator来发布事件 LongEventProducerWithTranslator
+  另一个好处是，Translator可以分离出来并且更加容易单元测试。Disruptor提供了不同的接口(EventTranslator, EventTranslatorOneArg, EventTranslatorTwoArg, 等等)去产生一个Translator对象。很明显，Translator中方法的参数是通过RingBuffer来传递的。
+7.测试：MainTest
+8.测试：Disruptor在自己的接口里面添加了对于Java 8 Lambda的支持。大部分Disruptor中的接口都符合Functional Interface的要求（也就是在接口中仅仅有一个方法）。所以在Disruptor中，可以广泛使用Lambda来代替自定义类 MainTestJava8
+9.多消费者模式 消费者要实现接口WorkHandler而不是EventHandler；还需要WorkerPool维护多消费者 https://www.jianshu.com/p/ffec46d69b33?utm_campaign=maleskine...
+
+
+
+
+
+
+
+
+
+
+
+
+https://ifeve.com/disruptor-getting-started/
+
+https://tech.meituan.com/2016/11/18/disruptor.html
+
+https://blog.csdn.net/weixin_37910453/category_8726821.html
