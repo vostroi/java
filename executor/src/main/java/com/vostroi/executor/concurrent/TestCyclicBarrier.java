@@ -32,8 +32,8 @@ public class TestCyclicBarrier {
 
     public static void main(String[] args) {
 
-//        testBarrier1();
-        testBarrier2();
+        testBarrier1();
+//        testBarrier2();
     }
 
     private static void testBarrier1() {
@@ -55,8 +55,8 @@ public class TestCyclicBarrier {
         }).start();
 
         try {
-            // 这里注释后，子线程会一直阻塞，因为 barrier1 需要2个线程都达到屏障
-            // barrier1.await();
+             // 这里注释后，子线程会一直阻塞，因为 barrier1 需要2个线程都达到屏障
+             barrier1.await();
             System.out.println("main 1");
         } catch (Exception e) {
             e.printStackTrace();

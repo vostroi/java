@@ -9,8 +9,8 @@ import java.util.concurrent.CountDownLatch;
  * @date 2021/5/10 15:57
  * @projectName executor
  * @title: TestCountDownLatch
- * @description: CountDownLatch 闭锁：用来让一个线程等待一个或多个线程执行完成，类型于当前线程调用join()，让其它线程加入进当前线程，其它线程执行完再执行当前线程剩下的逻辑
- * 1. countDown() 和 await() 配合使用才能达到类型 join()效果
+ * @description: CountDownLatch 闭锁：用来让一个线程等待一个或多个线程执行完成，类似于当前线程调用join()，让其它线程加入进当前线程，其它线程执行完再执行当前线程剩下的逻辑
+ * 1. countDown() 和 await() 配合使用才能达到类似 join()效果
  * 2. 构造方法，要传入总共要等待的线程数量，也就是计数器
  * 3. countDown()方法可以用在任何地方，可以是某一个步骤点，也可以是一个线程，每次调用计数器减1，直到计数器为0
  * 4. 在阻塞（等待其它线程执行）的主线程中，调用 await()方法，等待调用了countDown()的线程，直到计数器为0，主线程开始执行剩下的逻辑，如果被等待的线程执行过久，主线程不想一直等待，可调用await(time,timeunit)
@@ -62,7 +62,7 @@ public class TestCountDownLatch {
         }).start();
 
         long time2 = System.currentTimeMillis();
-        log.info("主线程 耗时{},子线程创建完成...",time2-start);
+        log.info("主线程 耗时{},子线程创建完成... 等待了线程执行完毕...",time2-start);
 
         // 在等待的主线程中调用await()，直到CountDownLatch的计数器为0，再继续执行主线程的逻辑
         try {

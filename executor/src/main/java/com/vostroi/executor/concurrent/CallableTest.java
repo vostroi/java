@@ -3,6 +3,7 @@ package com.vostroi.executor.concurrent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -17,6 +18,9 @@ public class CallableTest implements Callable {
     public Object call() throws Exception {
         String content = "CallableTest call do something...";
         log.info(content);
+
+        TimeUnit.SECONDS.sleep(10);
+
         return content;
     }
 }
