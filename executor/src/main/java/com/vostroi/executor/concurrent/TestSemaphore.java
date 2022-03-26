@@ -21,7 +21,7 @@ import java.util.concurrent.Semaphore;
 @Slf4j
 public class TestSemaphore {
 
-    // 初始化 传入通行证数量
+    // 初始化 传入通行证数量  一次性最多允许 并行的线程数量 也就是 初始可用的通行证数量
     private static Semaphore semaphore = new Semaphore(4);
 
     public static void main(String[] args) {

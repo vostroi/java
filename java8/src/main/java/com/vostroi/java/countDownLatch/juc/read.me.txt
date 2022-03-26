@@ -1,0 +1,3 @@
+jdk自带的CountDownLatch
+
+java8之后还可以使用CompletableFuture 有待研究

@@ -23,10 +23,14 @@ public class TestExecutor {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 100, TimeUnit.SECONDS , new ArrayBlockingQueue<Runnable>(5));
         Future future = threadPoolExecutor.submit(new CallableTest());
         try {
-            System.out.println(1234.56 % 360);
 
             // future.get() 会阻塞当前线程
             System.out.println(future.get());
+
+
+            System.out.println(1234.56 % 360);
+
+
             System.out.println("CPU数量"+Runtime.getRuntime().availableProcessors());
 
         } catch (InterruptedException e) {

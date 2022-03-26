@@ -1,7 +1,9 @@
 package com.vostroi.java8.threadlocal;
 
-import com.vostroi.java8.beans.Customer;
+import cn.hutool.db.ds.simple.SimpleDataSource;
 import com.vostroi.java8.threadlocal.bean.ThreadLocalBean;
+
+import java.text.SimpleDateFormat;
 
 /**
  * @author Administrator
@@ -11,9 +13,24 @@ import com.vostroi.java8.threadlocal.bean.ThreadLocalBean;
  * @description: TODO
  */
 public class Demo01 {
+    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>(){
+        @Override
+        protected SimpleDateFormat initialValue()
+        {
+            return new SimpleDateFormat("yyyyMMdd HHmm");
+        }
+    };
+
+    // 与上面代码块等效
+    private static final ThreadLocal<SimpleDateFormat> formatter2 = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy"));
 
     public static void main(String[] args) {
         ThreadLocalBean bean = new ThreadLocalBean("ThreadLocalBean名称", "ThreadLocalBean");
+        //ThreadLocal<ThreadLocalBean> sThreadLocal = ThreadLocal.withInitial(()->new ThreadLocalBean());
+
+
+
+
         for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(() -> {
                 bean.setBean();

@@ -1,8 +1,5 @@
 package com.vostroi.java8.thread.base;
 
-import com.vostroi.java8.beans.Customer;
-
-import javax.sound.midi.Soundbank;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
